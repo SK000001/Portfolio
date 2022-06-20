@@ -1,1 +1,156 @@
-<h1>HAHA ITS SHIVAM THE GREAT's WEBSITE</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+
+    <script>
+        function add_row() {
+            var r = parseInt(document.getElementById("rows").value);
+            var c = parseInt(document.getElementById("cols").value);
+
+            if ( c == 0 ) { 
+                document.forms["mat_1"]["cols"].value = (++c).toString(); 
+            }
+
+            if (r < 3) {
+                document.forms["mat_1"]["rows"].value = (++r).toString();
+
+                for (let i=0; i < r; i++) {
+                    for (let j=0; j < c; j++) {
+                        document.getElementById(i.toString() + j.toString()).hidden = false;
+                    }  
+                }
+            }
+        }
+
+        function add_col() {
+            var r = parseInt(document.getElementById("rows").value);
+            var c = parseInt(document.getElementById("cols").value);
+
+            if ( r == 0 ) { 
+                document.forms["mat_1"]["rows"].value = (++r).toString(); 
+            }
+
+            if (c < 3) { 
+                document.forms["mat_1"]["cols"].value = (++c).toString();
+
+                for (let i=0; i < r; i++) {
+                    for (let j=0; j < c; j++) {
+                        document.getElementById(i.toString() + j.toString()).hidden = false;
+                    }  
+                }
+            }
+        }
+
+        function del_row() {
+            var r = parseInt(document.getElementById("rows").value);
+            var c = parseInt(document.getElementById("cols").value);
+
+            if (r > 0) {
+                document.forms["mat_1"]["rows"].value = (--r).toString();
+
+                for (let i=0; i < 3; i++) {
+                    for (let j=0; j < 3; j++) {
+                        if (i >= r) {
+                            var idx = i.toString() + j.toString()
+                            document.getElementById(idx).hidden = true;
+                            document.getElementById(idx).value = 0;
+                        }
+                    } 
+                }
+            }
+
+            if ( r == 0 ) { 
+                document.forms["mat_1"]["cols"].value = (0).toString();
+            }
+        }
+
+        function del_col() {
+            var r = parseInt(document.getElementById("rows").value);
+            var c = parseInt(document.getElementById("cols").value);
+
+            if (c > 0) {
+                document.forms["mat_1"]["cols"].value = (--c).toString();
+
+                for (let i=0; i < 3; i++) {
+                    for (let j=0; j < 3; j++) {
+                        if (j >= c) {
+                            var idx = i.toString() + j.toString()
+                            document.getElementById(idx).hidden = true;
+                            document.getElementById(idx).value = 0;
+                        }
+                    } 
+                }
+            }
+
+            if ( c == 0 ) { 
+                document.forms["mat_1"]["rows"].value = (0).toString();
+            }
+        }
+
+        function sqr_mat() {
+            var r = parseInt(document.getElementById("rows").value);
+            var c = parseInt(document.getElementById("cols").value);
+
+
+            for (let i=0; i < r; i++) {
+                for (let j=0; j < c; j++) {
+                    var idx = i.toString() + j.toString()
+                    var val = parseInt(document.getElementById(idx).value);
+
+                    document.getElementById(idx).value = (val * val).toString();
+                }  
+            }
+        }
+    </script>
+
+    <style>
+        button {
+            padding: 10px 5px;
+        }
+        .del {
+            padding: 10px 7px;
+        }
+
+        textarea {
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>ENTER NUMBERS</h1>
+    </center>
+
+    <form id="mat_1" name="mat_1" align="center">
+        <textarea type="text" title="rows" name="rows" id="rows" rows="1" cols="1" maxlength="2" disabled="true">0</textarea>
+        <textarea type="text" title="cols" name="cols" id="cols" rows="1" cols="1" maxlength="2" disabled="true">0</textarea>
+        <br /><br />
+
+        <input type="text" name="00" id="00" size="2px" maxlength="2" hidden="true" value="0" />
+        <input type="text" name="01" id="01" size="2px" maxlength="2" hidden="true" value="0" />
+        <input type="text" name="02" id="02" size="2px" maxlength="2" hidden="true" value="0" />
+        <br />
+        <input type="text" name="10" id="10" size="2px" maxlength="2" hidden="true" value="0" />
+        <input type="text" name="11" id="11" size="2px" maxlength="2" hidden="true" value="0" />
+        <input type="text" name="12" id="12" size="2px" maxlength="2" hidden="true" value="0" />
+        <br />
+        <input type="text" name="20" id="20" size="2px" maxlength="2" hidden="true" value="0" />
+        <input type="text" name="21" id="21" size="2px" maxlength="2" hidden="true" value="0" />
+        <input type="text" name="22" id="22" size="2px" maxlength="2" hidden="true" value="0" />
+        <br /><br />
+
+        <button type="button" onclick="add_row()">ADD ROW</button>
+        <button type="button" onclick="add_col()">ADD COL</button>
+        <br /><br />
+        <button class="del" type="button" onclick="del_row()">DEL ROW</button>
+        <button class="del" type="button" onclick="del_col()">DEL COL</button>
+        <br /><br />
+        <button class="sqr" type="button" onclick="sqr_mat()">SQR MAT</button>
+    </form>
+    
+</body>
+</html>
